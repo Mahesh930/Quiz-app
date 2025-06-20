@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quiz App</title>
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div id="quiz-container">
+            <h1 id="hello">Hello User</h1>
+            <form onsubmit="return getName()">
+                <input type="text" name="name" id="name" required />
+                <input type="submit" value="Enter" />
+            </form>
+            <h5 id="welcome"></h5>
+            <hr style="width: 70%" />
+            <div class="btn-container">
+                <button onclick="startQuiz(event)" value="HTML">HTML</button>
+                <button onclick="startQuiz(event)" value="CSS">CSS</button>
+                <button onclick="startQuiz(event)" value="JAVA">JAVA</button>
+                <button onclick="startQuiz(event)" value="C++">C++</button>
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
