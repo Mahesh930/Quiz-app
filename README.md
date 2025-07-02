@@ -49,3 +49,10 @@ Open index.html with your browser.
 - HTML5
 - CSS3
 - JavaScript (Vanilla)
+
+  ## 🌐 Deployed Link
+
+👉 **[Click Here to Open the Quiz App](https://mahesh930.github.io/Quiz-app/)**
+
+> The project is live and accessible from the above link.
+
