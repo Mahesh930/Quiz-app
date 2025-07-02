@@ -346,7 +346,6 @@ const questions = [
         answer: "new",
     },
 ];
-
 let name = "";
 let category = "";
 let score = 0;
@@ -357,39 +356,35 @@ let timerId;
 
 function getName() {
     name = document.getElementById("name").value;
-    document.getElementById("name").innerText = "";
-    // console.log(name);
+    document.getElementById("name").value = "";
     if (name === "") return false;
-    else {
-        document.getElementById("welcome").innerText = "Welcome " + name;
-    }
+    document.getElementById("welcome").innerText = "Welcome " + name + " !";
     return false;
 }
 
 function startQuiz(event) {
+    if (name === "") {
+        alert("Please enter your name to start the quiz.");
+        return;
+    }
     questionCount = 0;
-    // tmr = 20;
-    // if(name=="")return alert("Name is required to start the quize!!");
+    score = 0;
     category = event.target.value;
-    // console.log(category);
     categoryQuestion = questions.filter((q) => q.category === category);
-    // console.log(categoryQuestion);
 
-    document.getElementById("quiz-container").innerHTML = "";
-    let qpage = `
+    const qpage = `
         <h1>${category}</h1>
         <div style="display: flex; gap: 2rem; justify-content: center; margin: 1rem 0;">
             <h5 id='timer'>Time: 20</h5>
             <h5 id='score'>Score: ${score}</h5>
         </div>
         <hr>
-        <div id="question-container">
-        </div>
-        <div id="option-container"></div>
-        <button onclick="newxQuestion()">Next Question</button>
+        <div id="Que"></div>
+        <div id="Ope"></div>
+        <button class="action-btn" onclick="newxQuestion()">Next Question</button>
     `;
     document.getElementById("quiz-container").innerHTML = qpage;
-    showQuestion(); //hoisting
+    showQuestion();
 }
 
 function goHome() {
@@ -399,24 +394,19 @@ function goHome() {
 function showQuestion() {
     if (questionCount >= categoryQuestion.length) {
         clearInterval(timerId);
-        document.getElementById(
-            "quiz-container"
-        ).innerHTML = `<h2>Quiz Completed!</h2><p>Your Score: ${score}/${categoryQuestion.length}</p>`;
-
-        document.getElementById("quiz-container").innerHTML += `
-        
-        <button onclick="goHome()">Home</button>
-        <button onclick="startQuiz({ target: { value: category } })">Repeat Test</button>
+        document.getElementById("quiz-container").innerHTML = `
+            <h2>Quiz Completed!</h2>
+            <p>Your Score: ${score}/${categoryQuestion.length}</p>
+            <button class="action-btn" onclick="goHome()">Home</button>
+            <button class="action-btn" onclick="startQuiz({ target: { value: category } })">ReTest</button>
         `;
-
         return;
     }
 
-    // console.log("hello");
     tmr = 20;
     document.getElementById("timer").innerText = "Time: " + tmr;
 
-    clearInterval(timerId); // reset previous timer
+    clearInterval(timerId);
     timerId = setInterval(() => {
         tmr--;
         document.getElementById("timer").innerText = "Time: " + tmr;
@@ -427,40 +417,47 @@ function showQuestion() {
     }, 1000);
 
     const currentQ = categoryQuestion[questionCount];
-    document.getElementById("question-container").innerHTML = `<p>Q${
-        questionCount + 1
-    }. ${currentQ.Question}</p>`;
+    document.getElementById("Que").innerHTML = `<p>Q${questionCount + 1}. ${currentQ.Question}</p>`;
 
-    const optionsHtml = currentQ.options
-        .map(
-            (option) => `
-            <input type='radio' name='opt' onclick="check('${option}')" > ${option}`
-        )
-        .join("<br>");
+    const optionsDiv = document.getElementById("Ope");
+    optionsDiv.innerHTML = "";
 
-    document.getElementById("option-container").innerHTML = optionsHtml;
-}
-
-let optionCheck = "";
-function check(op) {
-    optionCheck = op;
-    // console.log(optionCheck);
+    currentQ.options.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerText = opt;
+        btn.value = opt;
+        btn.onclick = () => checkAnswer(opt, btn);
+        optionsDiv.appendChild(btn);
+    });
 }
 
 function newxQuestion() {
     questionCount++;
     showQuestion();
-    checkAnswer(optionCheck);
 }
 
-function checkAnswer(selectedOption) {
-    // console.log(questionCount);
+function checkAnswer(selectedOption, clickedButton) {
+    clearInterval(timerId);
 
-    const correct = categoryQuestion[questionCount - 1].answer;
-    // console.log(correct);
+    const currentQ = categoryQuestion[questionCount];
+    const correct = currentQ.answer;
+
+    const allButtons = document.querySelectorAll(".option-btn");
+
+    allButtons.forEach((btn) => {
+        btn.disabled = true;
+        if (btn.value === correct) {
+            btn.style.backgroundColor = "green";
+            btn.style.color = "white";
+        }
+    });
 
     if (selectedOption === correct) {
         score += 1;
         document.getElementById("score").innerText = "Score: " + score;
+    } else {
+        clickedButton.style.backgroundColor = "red";
+        clickedButton.style.color = "white";
     }
 }

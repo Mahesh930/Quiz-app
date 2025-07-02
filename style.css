@@ -1,12 +1,14 @@
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Main Container */
 #quiz-container {
     width: 75%;
-    height: 80vh;
+    min-height: 80vh;
     border: 5px solid lightgray;
     margin: 5rem auto;
     display: flex;
@@ -15,26 +17,142 @@
     justify-content: center;
     align-items: center;
     background-color: lightblue;
-}
-#question-container {
-    border: 4px solid lightgray;
-    width: 60%;
-    height: 12rem;
+    border-radius: 15px;
+    padding: 2rem;
 }
 
+/* Logo */
+#logo {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 10%;
+    margin-bottom: 1rem;
+}
+
+/* Name Input */
+#name {
+    width: 20rem;
+    height: 2rem;
+    border-radius: 10px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #aaa;
+}
+
+#enter-btn {
+    width: 5rem;
+    height: 2rem;
+    background-color: green;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+}
+
+#enter-btn:hover {
+    background-color: darkgreen;
+}
+
+/* Category Buttons */
 .btn-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px; /* Optional */
+    gap: 1rem;
     width: 50%;
 }
+
 .btn-container button {
-    /* width: %; Approx half with gap */
     background-color: blue;
     border-radius: 10px;
     color: white;
-    height: 2rem;
+    height: 2.5rem;
     cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    transition: 0.3s;
 }
 
+.btn-container button:hover {
+    background-color: darkblue;
+}
 
+/* Question Box */
+#Que {
+    background-color: #fff;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    border: 3px solid #aaa;
+    width: 70%;
+    text-align: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+#Que p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Option Buttons Grid */
+#Ope {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+    width: 60%;
+}
+
+.option-btn {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.option-btn:hover {
+    background-color: #d3d3d3;
+}
+
+.option-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Action Buttons (Next, Home, Retest) */
+.action-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    margin: 0.5rem;
+}
+
+.action-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+/* Timer & Score */
+#timer,
+#score {
+    font-size: 1.2rem;
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 2px solid gray;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
