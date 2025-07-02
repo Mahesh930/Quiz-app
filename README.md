@@ -18,6 +18,7 @@ Users can select a category, answer questions with a countdown timer, and get in
 ---
 
 ## 📂 Folder Structure
+```bash
 quiz-app/
 ├── index.html # Main HTML file
 ├── style.css # Styling file
@@ -25,7 +26,7 @@ quiz-app/
 ├── logo.jpg # Logo image
 ├── README.md # This README file
 
-
+```
 
 ---
 
